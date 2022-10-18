@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    earth.bsc.es/gitlab/encomienda/sdswas.events:
+      branch: master
+      repo: https://earth.bsc.es/gitlab/encomienda/sdswas.events
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      earth.bsc.es/gitlab/encomienda/sdswas.events git:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-maroon-frise.sh
+        container: qc.acc_chummy-viridian-dingo
+  QC.Doc:
+    repos:
+      earth.bsc.es/gitlab/encomienda/sdswas.events find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-thistle-flounder.sh
+        container: qc.doc_surly-ochre-clam
+      earth.bsc.es/gitlab/encomienda/sdswas.events git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-jade-gerbil.sh
+        container: qc.doc_smelly-platinum-lemur
+      earth.bsc.es/gitlab/encomienda/sdswas.events markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-amaranth-hyena.sh
+        container: qc.doc_chewy-lemon-toucan
+      earth.bsc.es/gitlab/encomienda/sdswas.events restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-khaki-tarsier.sh
+        container: qc.doc_craggy-zucchini-fousek
+  QC.Lic:
+    repos:
+      earth.bsc.es/gitlab/encomienda/sdswas.events licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-wheat-shrew.sh
+        container: qc.lic_cloudy-cornflower-chamois
+  QC.Sec:
+    repos:
+      earth.bsc.es/gitlab/encomienda/sdswas.events bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-pumpkin-emu.sh
+        container: qc.sec_gummy-gamboge-moose
+  QC.Sty:
+    repos:
+      earth.bsc.es/gitlab/encomienda/sdswas.events flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-celadon-rat.sh
+        container: qc.sty_nippy-asparagus-oyster
+      earth.bsc.es/gitlab/encomienda/sdswas.events stylelint:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-khaki-newfoundland.sh
+        container: qc.sty_baggy-amber-civet
+  QC.Ver:
+    repos:
+      earth.bsc.es/gitlab/encomienda/sdswas.events get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-copper-macaw.sh
+        container: qc.ver_thirsty-apricot-havanese
+timeout: 1800
